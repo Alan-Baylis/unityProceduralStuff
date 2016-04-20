@@ -11,6 +11,7 @@ public class proceduralGrass : MonoBehaviour {
 	public float randDisplace = .1f;
 	public float density = 1.0f;
 	public float scaleMod = 4.0f;
+	public float grashHeightMod = .6f;
 	public GameObject grass;
 	noise myNoise;
 
@@ -34,7 +35,10 @@ public class proceduralGrass : MonoBehaviour {
 					float newScale = Mathf.Pow(scaleSample,2) + (mappedSample - cutOff)*10.0f;
 					float randomX = Random.Range(-randDisplace, randDisplace);
 					float randomY = Random.Range(-randDisplace, randDisplace);
-					GameObject newGrass = Instantiate(grass, new Vector3(x+randomX,mappedSample+.6f,y+randomY),grass.transform.rotation) as GameObject;
+
+					float yPos = getHeight(new Vector3(randomX,4.0f,randomY)) + grashHeightMod;
+
+					GameObject newGrass = Instantiate(grass, new Vector3(x+randomX-dims/2,yPos,y+randomY-dims/2),grass.transform.rotation) as GameObject;
 					float randRot = Random.Range(0, 360);
 					Vector3 newRot = new Vector3(0,randRot,0);
 					newGrass.transform.Rotate(newRot);
@@ -95,5 +99,17 @@ public class proceduralGrass : MonoBehaviour {
 		float NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin;
 
 		return(NewValue);
+	}
+
+	public float getHeight(Vector3 position){
+
+		RaycastHit hit;
+
+		if (Physics.Raycast(position, -Vector3.up, out hit, 100.0f)){
+			return hit.point.y;
+		} else {
+			return 0.0f;
+		}
+
 	}
 }
