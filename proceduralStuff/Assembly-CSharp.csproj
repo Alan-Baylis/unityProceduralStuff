@@ -55,12 +55,16 @@
      <Compile Include="Assets\Scripts\Main\main.cs" />
      <Compile Include="Assets\Scripts\Main\proceduralGrass.cs" />
      <Compile Include="Assets\Scripts\Main\terain.cs" />
+     <Compile Include="Assets\Scripts\Trees\createTrees.cs" />
+     <Compile Include="Assets\Scripts\Trees\tree.cs" />
      <Compile Include="Assets\Scripts\noise\noise.cs" />
      <Compile Include="Assets\Scripts\noise\noiseFunction1D.cs" />
      <Compile Include="Assets\Scripts\noise\noiseFunction2D.cs" />
      <Compile Include="Assets\Scripts\noise\randomNoise.cs" />
+     <Compile Include="Assets\Wasabimole\ProceduralTree\ProceduralTree.cs" />
      <None Include="Assets\Shaders\CustomTransparency.shader" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+     <None Include="Assets\Wasabimole\ProceduralTree\Readme.txt" />
      <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
      <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
      <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
