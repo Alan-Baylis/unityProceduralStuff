@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\Main\main.cs" />
      <Compile Include="Assets\Scripts\Main\proceduralGrass.cs" />
      <Compile Include="Assets\Scripts\Main\terain.cs" />
+     <Compile Include="Assets\Scripts\Trees\GeneticAlgorithm.cs" />
      <Compile Include="Assets\Scripts\Trees\createTrees.cs" />
      <Compile Include="Assets\Scripts\Trees\tree.cs" />
      <Compile Include="Assets\Scripts\noise\noise.cs" />

@@ -4,19 +4,18 @@ using System.Collections.Generic;
 
 public class tree {
 
-	//via http://www.wasabimole.com/procedural-tree/how-to-generate-a-procedural-tree-in-unity-3d/
+	//adapted via http://www.wasabimole.com/procedural-tree/how-to-generate-a-procedural-tree-in-unity-3d/
 
-	int Seed; // Random seed on which the generation is based
 	int MaxNumVertices = 65000; // Maximum number of vertices for the tree mesh
-	int NumberOfSides = 16; // Number of sides for tree
-	float BaseRadius = 2f; // Base radius in meters
-	float RadiusStep = 0.9f; // Controls how quickly radius decreases
-	float MinimumRadius = 0.02f; // Minimum radius for the tree's smallest branches
-	float BranchRoundness = 0.8f; // Controls how round branches are
-	float SegmentLength = 0.5f; // Length of branch segments
-	float Twisting = 20f; // How much branches twist
-	float BranchProbability = 0.1f; // Branch probability
-	float scale = .5f;
+	int NumberOfSides; // Number of sides for tree
+	float BaseRadius; // Base radius in meters
+	float RadiusStep; // Controls how quickly radius decreases
+	float MinimumRadius; // Minimum radius for the tree's smallest branches
+	float BranchRoundness; // Controls how round branches are
+	float SegmentLength; // Length of branch segments
+	float Twisting; // How much branches twist
+	float BranchProbability; // Branch probability
+	float scale;
 
 	float[] ringShape;
 	GameObject newTree;
@@ -29,7 +28,17 @@ public class tree {
 	List<int> triangleList; // Triangle list
 
 
-	public tree(){
+	public tree(int ns, float br, float rs, float mr, float bro, float sl, float t, float bp, float s){
+
+		NumberOfSides = ns; // Number of sides for tree
+		BaseRadius = br; // Base radius in meters
+		RadiusStep = rs; // Controls how quickly radius decreases
+		MinimumRadius = mr; // Minimum radius for the tree's smallest branches
+		BranchRoundness = bro; // Controls how round branches are
+		SegmentLength = sl; // Length of branch segments
+		Twisting = t; // How much branches twist
+		BranchProbability = bp; // Branch probability
+		scale = s;
 
 		newTree = new GameObject();
 		vertexList = new List<Vector3>();
@@ -61,12 +70,14 @@ public class tree {
 
 	public void branch(Quaternion quaternion, Vector3 position, int lastRingVertexIndex, float radius, float texCoordV){
 
+
 		Vector3 offset = Vector3.zero;
 		Vector2 texCoord = new Vector2(0f, texCoordV);
 		float textureStepU = 1f / NumberOfSides;
 		float angInc = 2f * Mathf.PI * textureStepU;
 		float ang = 0f;
 
+		//create ring shape
 		for (var n = 0; n <= NumberOfSides; n++, ang += angInc) 
 		{
 			float r = ringShape[n] * radius;
@@ -77,6 +88,7 @@ public class tree {
 			texCoord.x += textureStepU;
 		}
 
+		//creates the mesh between the last two rings
 		if (lastRingVertexIndex >= 0) // After first base ring is added ...
 		{
 			// Create new branch segment quads, between last two vertex rings
@@ -127,6 +139,7 @@ public class tree {
 		z = Random.value * 70f - 35f;
 		z += z > 0 ? 10f : -10f;
 		newTree.transform.Rotate(x, 0f, z);
+
 		branch(newTree.transform.rotation, position, lastRingVertexIndex, radius, texCoordV);
 
 

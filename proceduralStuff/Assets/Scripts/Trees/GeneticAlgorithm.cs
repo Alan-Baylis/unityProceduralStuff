@@ -1,51 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class createTrees : MonoBehaviour {
+public class GeneticAlgorithm : MonoBehaviour {
 
-	public Color treeColor;
-
-	public bool isForest;
-
+	public int populationSize = 20;
 	// Use this for initialization
 	void Start () {
 	
-		if(isForest){
-			forest();
-		} else {
-			singleTree();
-		}
-
-
+		forest();
 	}
 	
-	void singleTree(){
-
-
-
-		tree newTree = new tree(16,2f,.9f,.01f,.8f,.8f,.8f,.08f,.5f);
-
-		RaycastHit hit;
-
-		Vector3 position = new Vector3(0,-5,5);
-		float yPos;
-		if (Physics.Raycast(position, -Vector3.up, out hit, 100.0f)){
-			Debug.Log( hit.point.y);
-			yPos =  hit.point.y;
-		} else {
-			yPos = 0.0f;
-		}
-			
-		Vector3 newPos = new Vector3(position.x, yPos, position.z);
-
-		GameObject createdTree = newTree.generate(position, treeColor);
-		createdTree.transform.position = newPos;
-		createdTree.name = "GeneratedTree";
+	// Update is called once per frame
+	void Update () {
+	
 	}
+
 
 	void forest(){
 
-		for(int i = 0; i<20; i++){
+		for(int i = 0; i<populationSize; i++){
 
 			int ns = (int)Random.Range(10f, 16f);
 			float br = Random.Range(.5f, 4f);
@@ -61,6 +34,8 @@ public class createTrees : MonoBehaviour {
 
 			Vector3 newPos = new Vector3(Random.Range(-20f,20f),0, Random.Range(-20f,20f));
 
+			Color treeColor = new Color(Random.value, Random.value, Random.value);
+
 			GameObject createdTree = newTree.generate(Vector3.zero, treeColor);
 			createdTree.transform.position = newPos;
 			createdTree.name = "GeneratedTree";
@@ -68,4 +43,5 @@ public class createTrees : MonoBehaviour {
 		}
 
 	}
+
 }
